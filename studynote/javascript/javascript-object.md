@@ -92,7 +92,7 @@ var tom = new Person("Tom",23);
 var jerry = new Person("Jerry",20);
 ```  
 ![prototype](https://github.com/IFYOUUUU/Blog/blob/master/images/prototype.png)  
-首先我们实例化了tom和jerry两个对象，第1、2步这两个对象都是有**__proto__**属性的，它们会跟Person的原型对象进行连接，而第3步则是Person本身也是有prototype属性的，因此它也可以连接自己的原型对象。第4步则是每个原型函数都有一个构造函数，会指向原来的对象，同理可知，Person的**__proto__**会与Function的原型对象连接，最后的6、7步则最终会连接到Object这个全局对象的原型对象上去，知道**__proto__**为null就停止。
+首先我们实例化了tom和jerry两个对象，第1、2步这两个对象都是有__proto__属性的，它们会跟Person的原型对象进行连接，而第3步则是Person本身也是有prototype属性的，因此它也可以连接自己的原型对象。第4步则是每个原型函数都有一个构造函数，会指向原来的对象，同理可知，Person的__proto__会与Function的原型对象连接，最后的6、7步则最终会连接到Object这个全局对象的原型对象上去，知道__proto__为null就停止。
 ## this指针  
 在javascript中，this表示当前上下文，即调用者的引用。在语言规范里规定它指向函数执行的那个对象。它代表函数运行时，自动生成的一个内部对象，只能在函数的内部使用，因此它指向在函数定义的时候是不确定的，只有在函数执行的时候才能确定this到底指向谁。实际上this最终指向调用方法的那个对象。  
 如果一个函数中有this，那么这个函数包含多个对象，尽管这个函数是被外层的对象所调用，this指向的也只是它的上一级对象，例如：  
