@@ -42,6 +42,50 @@ window.func = function(id){
     ...
 }
 ```  
+### 对象的使用  
+对象是javascript的基础，我们使用javascript来完成编译工作就是通过使用对象来实现的，声明对象的三种方式：  
+1、通过new操作符作用于Object对象，构造一个新的对象，然后动态的添加它的属性，这种从无到有的构建对象的方式弊端在于复用性不高。  
+```js
+var obj = new Object();
+obj.name = "jack";
+obj,sex = "man";
+obj.sayNam = function(name){
+    this.name = name ;
+    console.log(name);
+}
+obj.sayName("Tom");
+console.log(obj.name);
+```  
+2、定义对象的构造函数，然后使用new操作符来批量来构建新的对象  
+```js
+//我们可以定义一个属性为对象
+function Address(street,xno){
+    this.street = street;
+    this.xno = xno;
+    this.toString = function(){
+        return "street :" + this.street + "xno :" + this.xno;
+    }
+}
+function Person(name,age,addr){
+    this.name = name;
+    this.age = age;
+    this,addr = addr;
+    this.getName = function(){
+        return this.name;
+    };
+    this.getAge = function(){
+        return this.age;
+    };
+    this.getAddr = function(){
+        return this,addr.toString();
+    }
+}
+//通过new操作符来创建这两个对象，注意，这两个对象是相互独立的实体
+var jack = new Person("jack",24,new Address('武大园二路',1308));
+console.log(jack.getAddr);  //street :武大园二路 xno :1308
+```  
+3、使用JSON，这种方式我们在JSON这部分详细讲解。  
+
 ## 原型对象及原型链  
 原型（prototype），是javascript中特有的一个概念，通过使用原型，javascript可以建立其传统OO语言中的继承，从而实现对象的层次关系。javascript本身是基于原型的，每个函数都有一个prototype属性，这个prototype本身也是一个对象，因此它本身也可以用到自己的原型，这样就形成了原型链。  
 访问一个属性的时候，解析器需要从下向上的遍历这个链结构，直到遇到该属性，则返回属性对应的值，或者遇到原型为null的对象（javascript的基对象Object构造器的默认prototype有一个null原型），如果遍历完整个链结构，此对象还是没有该属性，则返回undefined。  
@@ -168,4 +212,108 @@ function printName(){
 }
 var new_printName = printName.bind(jack);
 console.log(new_printName());  //jack
-```
+```  
+## javascript对象的原型继承  
+javascript本身是基于对象，而并非基于类的。但是javascript的函数式语言的特性使得它本身是可编程的，它可以变成你想要的任何形式。  
+原型继承是javascript中的继承是通过原型链来实现的，调用对象上的一个方法，由于方法在javascript对象中是对另一个函数对象的引用，因此解释器会在对象中去查找该属性，如果没有找到，就会在其内部prototype对象上继续搜索，由于prototype对象与对象本身的结构是一样的，因此这个过程会一直回溯到发现该属性，否则会报告一个错误。  
+我们来看一个例子：  
+```js
+function Base(){
+    this.baseFunc = function(){
+        print("base behavior");
+    }
+}
+
+function Middle(){
+    this.middleFunc = function(){
+        print("middle behavior");
+    }
+}
+Middle.prototype = new Base();
+
+function Final(){
+    this.finalFunc = function(){
+        print("final behavior");
+    }
+}
+Final.prototype = new Middle();
+function test(){
+    var obj = new Final();
+    obj.baseFunc();
+    obj.middleFunc();
+    obj.finalFunc();
+}
+//输出结果为：
+base behavior
+middle behavior
+final behavior
+```  
+![proto_extend](https://github.com/IFYOUUUU/Blog/blob/master/images/proto_extend.png)  
+
+在function test中，我们new了一个final对象，然后依次调用obj.baseFunc,由于obj对象上并没有此方法，按照上面的规则进行回溯，在其原型链上搜索，由于Final的原型链上包含Middle，而Middle上又包含Base，一直往上查找，最终会执行到这个方法，这样也就实现了类的继承。  
+
+## javascript对象的引用  
+javascript中的引用始终指向最终的对象，而非引用对象  
+```js
+var obj = {};       //创建一个空对象
+var ref = obj;      //ref 引用obj这个对象
+obj.name = "ObjectA";  //给obj对象添加属性name
+print(ref.name);      //ref对象会跟着添加这个name属性
+
+obj = ["one","two","three"];   //obj指向另外一个数组长度为3的数组对象
+print(ref.name);            //ref对象还是指向原来的对象
+print(obj);          //["one","two","three"]
+print(ref);         //ref对象还是指向原来的对象，name ： “ObjectA”
+```  
+## javascript对象的new操作符  
+```js
+var cat = new Animal("cat");
+new Animal("cat") = {
+    var obj = {};  //第一步
+    obj.__proto__ = Animal.prototype;   //第二步
+    var result = Animal.call(obj,"cat");    //第三步
+    return typeof result === 'obj' ? result : obj;   //第四步
+}
+```  
+javascript通过new操作符来作用于一个函数，实质上会发生一系列的动作：  
+1、创建了一个空对象 obj；  
+2、把obj对象的proto指向Animal的原型对象prototype，此时便建立了obj对象的原型链：obj->Animal.prototype->Object.prototype->Object.prototype->null;  
+3、在obj对象的执行环境调用Animal函数并传递参数'cat',相当于 var result = obj.Animal("cat");这句话执行完之后，obj属性便有了name属性，并赋值给'cat';  
+4、如果第三步没有返回值，或者返回一个非对象值，则将obj返回作为新对象，否则的话就将返回值作为新对象返回。  
+
+## javascript对象的封装  
+事实上，我们可以通过javascript的函数实现封装，封装的好处在于那些未经授权的客户代码无法访问到我们不公开的数据，数据的安全得到了保证。  
+```js
+function Person(name){
+    //private  variable
+    var aaddress = "武大园";
+    //public method
+    this.getAddress = function(){
+        return address;
+    };
+    //public variable
+    this.name = name;
+}
+//public 
+Person.prototype.getName = function(){
+    return this.name;
+}
+//public 
+Person.prototype.setName = function(name){
+    this.name = name;
+}
+
+//测试
+var jack = new Person("jack");
+print(jack.name);
+print(jack.getName());
+print(jack.address);
+print(jack.getAddress());
+
+//输出结果：
+jack
+jack
+undefined
+武大园
+```  
+首先声明一个函数，作为模板，用面向对象的术语来讲，就是一个类。用var方式声明的变量仅在类内部可见，所以address为一个私有成员，访问address的唯一方法就是通过我们想外面暴露的getAddress方法，而get/setName是原型链上的方法，因此是公开的，直接通过jack.address来访问address变量就会得到undefined，我们只有通过getAddress方法来访问才能等到address属性的值，这样一来address这个成员变量就被封装起来了。  
