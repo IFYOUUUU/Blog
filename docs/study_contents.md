@@ -28,7 +28,7 @@
 
 > * [DOM和BOM](https://github.com/IFYOUUUU/Blog/blob/master/studynote/javascript/javascript-DOM-BOM.md)
 
-> * [闭包]()
+> * [闭包](https://github.com/IFYOUUUU/Blog/blob/master/studynote/javascript/javascript-closure.md)
 
 > * [函数]()
 
