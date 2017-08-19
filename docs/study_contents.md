@@ -30,7 +30,7 @@
 
 > * [闭包](https://github.com/IFYOUUUU/Blog/blob/master/studynote/javascript/javascript-closure.md)
 
-> * [函数]()
+> * [函数](https://github.com/IFYOUUUU/Blog/blob/master/studynote/javascript/javascript-function.md)
 
 > * [ECMA5]()
 
