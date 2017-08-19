@@ -20,9 +20,9 @@
 
 > ## __JavaScript__
 
-> * [JS基础、语法规则]()
+> * [JS基础、语法规则](https://github.com/IFYOUUUU/Blog/blob/master/studynote/javascript/js-scope-of-vareable.md)
 
-> * [JS对象、原型链]()
+> * [JS对象、原型链](https://github.com/IFYOUUUU/Blog/blob/master/studynote/javascript/javascript-object.md)
 
 > * [执行上下文]()
 
