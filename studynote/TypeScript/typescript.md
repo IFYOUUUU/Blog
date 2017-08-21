@@ -1,6 +1,6 @@
 <!--TOC-->
-- [TypeScript入门教程]()
-    - [什么是javascript]()
+- [TypeScript入门教程](#typescript入门教程)
+    - [什么是javascript](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/typescript.md#什么是typescript)
         - [语法的特性]()
         - [ES5、ES6、JavaScript和TypeScript的概念与关系]()
         - [TypeScript与JavaScript的区别]()
