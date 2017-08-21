@@ -49,12 +49,12 @@
 
 ### 增加了代码的可读性和可维护性  
 * 类型注解实际上是最好的文档，大部分的函数看着类型的定义就可以知道如何使用  
-![1.png]()  
+![1.png](https://github.com/IFYOUUUU/Blog/blob/master/images/typescript/1.png)  
 
 * 可以在编译阶段就可以发现大部分错误  
-![2.png]()  
+![2.png](https://github.com/IFYOUUUU/Blog/blob/master/images/typescript/2.png)  
 **TypeScript只会进行静态检查，如果发现有错误，编译的时候就会提示报错。**  
-![3.png]()  
+![3.png](https://github.com/IFYOUUUU/Blog/blob/master/images/typescript/3.png)  
 **TypeScript编译的时候即使报错了，还是可以生成编译结果，我们仍然可以使用这个编译后的文件**  
 
 ### 包容性  
