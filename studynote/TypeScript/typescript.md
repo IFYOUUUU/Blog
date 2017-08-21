@@ -19,6 +19,8 @@
         - [接口](#接口)
         - [类](#类)
         - [箭头函数表达式](#箭头函数表达式)
+        - [装饰器]()
+    - [项目配置](#装饰器)
 <!--/TOC-->
 
 # TypeScript入门教程  
@@ -382,3 +384,33 @@ var shape = {
     }
 };
 ```  
+
+### [装饰器]()  
+
+
+## 项目配置  
+**tsconfig.json**  
+我们通常会往项目中加入一个TypeScript的配置文件（tsconfig），来知道编译器如何生成JavaScript文件  
+`tsconfig.json`示例文件：  
+```json
+{
+    "compilerOptions":{
+        "target":"es5",                 //指定ECMAScript目标版本（默认ES3）
+        "module":"commonjs",            //指定生成commomjs模块系统代码
+        "moduleResolution":"node",      //决定如何处理模块
+        "sourceMap":true,               //生成相应的.map文件
+        "emitDecoratorMetaData":true,   //给源代码里装饰器声明加上设计类型元数据
+        "experimentalDecorators":true,  //启用实验性的ES装饰器
+        "removeComments":false,         //删除所有注释，除了以/!*开头的版权信息
+        "noImplicitAny":false           //在表达式和声明上有隐含的any类型是报错
+    },
+    "include":[
+        "src/**/*"
+    ],
+    "exclude":[
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
+```  
+注：`compolerOptions`**可以被忽略，这时编译器会使用默认值**
