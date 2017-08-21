@@ -19,8 +19,8 @@
         - [接口](#接口)
         - [类](#类)
         - [箭头函数表达式](#箭头函数表达式)
-        - [装饰器]()
-    - [项目配置](#装饰器)
+        - [装饰器](#装饰器)
+    - [项目配置](#项目配置)
 <!--/TOC-->
 
 # TypeScript入门教程 [项目实例](https://github.com/IFYOUUUU/Blog/tree/master/project/TypeScript/typescript)  
