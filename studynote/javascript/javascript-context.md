@@ -6,12 +6,12 @@ javascript中代码的运行环境分为以下三种：
 2、函数级别代码：当执行一个函数时，运行函数体中的代码。  
 3、Eval的代码：在Eval函数内运行的代码。  
 为了使本个知识点的理解，我们可以将"执行上下文"看做当前代码的执行环境或者作用域。下面我们具体看一个例子，其中包含了全局以及函数级别的执行上下文：  
-![context](https://github.com/IFYOUUUU/Blog/blob/master/images/conext.png)  
+![context](https://github.com/IFYOUUUU/Blog/blob/master/images/javascript/conext.png)  
 从上图中可以看到，一共有4个执行上下文，红色区域代表的是全局上下文，紫色区域代表的是Person函数内执行上下文，黄色和绿色区域则是代表另外两个函数的执行上下文。注意的是：不管什么情况下，只存在一个全局的执行上下文，其他函数或者Eval函数可以是多个。该执行上下文能够被任何其他的执行上下文所访问到。  
 
 ## 执行上下文栈  
 在浏览器中，javascript引擎的工作方式是单线程的，也就是说，某一个时刻只有唯一的一个事件是被激活的，其他的时间呗放在队列中，等待被处理  
-![ECStack](https://github.com/IFYOUUUU/Blog/blob/master/images/ECStack.png)  
+![ECStack](https://github.com/IFYOUUUU/Blog/blob/master/images/javascript/ECStack.png)  
 当javascript代码文件被浏览器载入后，默认最先进入的是全局的执行上下文。当在全局执行上下文中调用执行一个函数是，程序流就进入被调用的函数内，此时引擎就会为该函数创建一个新的执行上下文，并且将其压入到执行上下文堆栈的顶部。浏览器总是执行当前堆栈顶部的上下文，一旦执行完毕，该上下文就会从堆栈中的顶部弹出，然后进入其下的上下文执行代码，这样，堆栈中的上下文就会被依次执行并且弹出，最终回来全局的执行上下文。  
 请看下面这个例子：  
 ```js

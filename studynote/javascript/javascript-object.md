@@ -135,7 +135,7 @@ function Person(name,age){
 var tom = new Person("Tom",23);
 var jerry = new Person("Jerry",20);
 ```  
-![prototype](https://github.com/IFYOUUUU/Blog/blob/master/images/prototype.png)  
+![prototype](https://github.com/IFYOUUUU/Blog/blob/master/images/javascript/prototype.png)  
 首先我们实例化了tom和jerry两个对象，第1、2步这两个对象都是有__proto__属性的，它们会跟Person的原型对象进行连接，而第3步则是Person本身也是有prototype属性的，因此它也可以连接自己的原型对象。第4步则是每个原型函数都有一个构造函数，会指向原来的对象，同理可知，Person的__proto__会与Function的原型对象连接，最后的6、7步则最终会连接到Object这个全局对象的原型对象上去，知道__proto__为null就停止。
 ## this指针  
 在javascript中，this表示当前上下文，即调用者的引用。在语言规范里规定它指向函数执行的那个对象。它代表函数运行时，自动生成的一个内部对象，只能在函数的内部使用，因此它指向在函数定义的时候是不确定的，只有在函数执行的时候才能确定this到底指向谁。实际上this最终指向调用方法的那个对象。  
@@ -248,7 +248,7 @@ base behavior
 middle behavior
 final behavior
 ```  
-![proto_extend](https://github.com/IFYOUUUU/Blog/blob/master/images/proto_extend.png)  
+![proto_extend](https://github.com/IFYOUUUU/Blog/blob/master/images/javascript/proto_extend.png)  
 
 在function test中，我们new了一个final对象，然后依次调用obj.baseFunc,由于obj对象上并没有此方法，按照上面的规则进行回溯，在其原型链上搜索，由于Final的原型链上包含Middle，而Middle上又包含Base，一直往上查找，最终会执行到这个方法，这样也就实现了类的继承。  
 
