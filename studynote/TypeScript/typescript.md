@@ -385,7 +385,7 @@ var shape = {
 };
 ```  
 
-### [装饰器]()  
+### [装饰器](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/Decorators.md)  
 
 
 ## 项目配置  
