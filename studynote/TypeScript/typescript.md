@@ -2,7 +2,7 @@
 - [TypeScript入门教程](#typescript入门教程)
     - [什么是javascript](#什么是typescript)
         - [语法的特性](#语法的特性)
-        - [ES5、ES6、JavaScript和TypeScript的概念与关系](#es5%E3%80%81es6%E3%80%81javascript%E5%92%8Ctypescript%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%85%B3%E7%B3%BB)
+        - [ES5、ES6、JavaScript和TypeScript的概念与关系](#es5es6javascript和typescript的概念与关系)
         - [TypeScript与JavaScript的区别](#typescript与javascript的区别)
     - [TypeScript的优势](#typescript的优势)
         - [增加了代码的可读性和可维护性](#增加了代码的可读性和可维护性)
