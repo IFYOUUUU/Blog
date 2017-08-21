@@ -23,7 +23,7 @@
     - [项目配置](#装饰器)
 <!--/TOC-->
 
-# TypeScript入门教程  
+# TypeScript入门教程 [项目实例](https://github.com/IFYOUUUU/Blog/tree/master/project/TypeScript/typescript)  
 
 ## 什么是TypeScript  
 简介：TypeScript是一种由微软开发的自由和开源的编程语言。它是JavaScript的一个超集，而且本质上向这个语言添加了可选的静态类型和基于类的面向对象编程。  
