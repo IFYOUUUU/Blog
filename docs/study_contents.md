@@ -38,7 +38,7 @@
 
 > ## __AngularJS__
 
-> * [typescript]()
+> * [typescript](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/typescript.md)
 
 > * [angular技术概览]()
 
