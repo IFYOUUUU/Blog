@@ -193,7 +193,7 @@ require(x)
 2、如果x是路径，先当作文件模块查找，在当作目录模块查找。  
 3、node_modules里面查找  
 
-![require]()  
+![require](https://github.com/IFYOUUUU/Blog/blob/master/images/NodeJS/require.jpg)  
 
 ## 6.package.json介绍  
 package.json是CommonJS规范的用来描述包的文件，该文件包含的字段有：  
