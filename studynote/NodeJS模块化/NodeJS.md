@@ -62,7 +62,7 @@ var service1 = require('/service');         //省略.js扩展名
 NodeJS自带的模块，可以直接通过模块名来引用。内置模块拥有最高的加载优先级，及时已经有了一个同名的第三方模块，内置模块也会被优先加载。  
 例如，如果想加载和使用http核心模块，可以这样做：  
 ```js
-var http = require('http);
+var http = require('http');
 ```  
 
 ### 4.5 加载文件模块  
