@@ -14,11 +14,13 @@
         - [TypeScript基础类型](#typescript基础类型)
         - [TypeScript变量的声明](#typescript变量的声明)
         - [TypeScript类型推论](#typescript类型推论)
+        - [TypeScript解构](#typescript解构)
     - [语法新特性详解](#语法新特性详解)
         - [类型注解](#类型注解)
         - [接口](#接口)
         - [类](#类)
         - [箭头函数表达式](#箭头函数表达式)
+        - [函数](#函数)
         - [装饰器](#装饰器)
     - [项目配置](#项目配置)
 <!--/TOC-->
@@ -96,7 +98,7 @@ function sayHello(str:string){
 let s = 'World';
 console.log(sayHello(s));
 ```  
-通过命令 tsc hello.td 将上面这段代码进行编译，会生成一个hello.js文件,运行这段js文件会得到结果“Hello World”。  
+通过命令 `tsc hello.td` 将上面这段代码进行编译，会生成一个`hello.js`文件,运行这段js文件会得到结果“Hello World”。  
 
 ## 基础知识  
 
@@ -104,6 +106,21 @@ console.log(sayHello(s));
 JavaScript的类型分为两种：原始数据类型和对象类型  
 原始数据类型包括：布尔值、数值、字符串、null、undefined、数组  
 TypeScript支持与JavaScript几乎相同的数据类型，此外还提供了实用的枚举类型方便我们使用  
+
+**布尔值**  
+最基本的数据类型就是简单的true/false值，在JavaScript和TypeScript里叫做boolean（其它语言中也一样）。  
+```typescript
+let isDone:boolean = false;
+```  
+
+**数字**  
+和JavaScript一样，TypeScript里的所有数字都是浮点数。 这些浮点数的类型是 number。 除了支持十进制和十六进制字面量，TypeScript还支持ECMAScript 2015中引入的二进制和八进制字面量。  
+```typescript
+let decLiteral: number = 6;
+let hexLiteral: number = 0xf00d;   //十六进制字面量
+let binaryLiteral: number = 0b1010;// 二进制字面量
+let octalLiteral: number = 0o744;  // 八进制字面量
+```  
 
 **字符串**  
 和javascript一样，可以使用双引号（""）和单引号（''）来表示字符串  
@@ -136,38 +153,49 @@ let list:Array<number> = [1,2,3,4];
 ```  
 
 **元组 Tuple**  
-数组合并了相同类型的对象，而元组合并了不同类型的对象  
+元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同。 比如，你可以定义一对值分别为 string和number类型的元组。
 ```typescript
-let x : [string,number,boolean,number];
-x = ['hello',10,true,20];
+let x : [string,number];
+x = ['hello',10];
+x = [10,'hello'];  //Error  初始化的时候需要按照定义的结构来初始化 
 
+//当访问一个已知索引的元素，会得到正确的类型：
 console.log(x[0].substr(0));  //截取hello字符串，从下标0开始，输出hello
-console.log(x[1]);     //输出数组10
+console.log(x[1].substr(0));  //Error, 'number' does not have 'substr' 
+
+/*当访问一个越界的元素，会使用联合类型替代：
+联合类型表示一个值可以是几种类型之一。 我们用竖线（ |）分隔每个类型，按照这个例子来说，
+所以越界的元素类型可以是number | string 表示一个值可以是number或string*/
+x[5] = "world";     //OK, 字符串可以赋值给(string | number)类型
+console.log(x[5].toString()); //OK, 'string' 和 'number' 都有 toString
+
+x[6] = true; // Error, 布尔不是(string | number)类型
 ```  
+__联合类型__是高级主题，我们会在以后的章节里讨论它  
+
+**联合类型**  
+联合类型表示取值可以为多种类型的一种  
+```typescript
+//联合类型表示取值可以为多种类型的一种
+let unite:string|number;
+unite = 1;
+unite = 'one';
+//unite = true;    error  并没有声明boolean类型
+```  
+
 **枚举 Enum**  
 enum类型是对javascript标准数据类型的一个补充，像java等其他语言一样，使用枚举类型可以为一组数值赋予友好的名字  
 ```typescript
 enum Color{Red,Green,Blue};
-let c:Color = Color.Red;
+let c:Color = Color.Red; 
+
+//默认情况下，跟数组一样，从下标0开始为元素编号。我们也可以自己手动赋值
+enum Animal{Cat = 1,Dog = 2,Mouse};
+let a:Animal = Animal.Mouse;
 
 /*枚举类型提供了一个便利就是可以由枚举的值得到它的名字。
 例如：我们知道数值为2，但是不确定它映射到Color里是那个名字，我们可以查找相应的名字*/
 let colorName : string = Color[2];
-console.log(colorName);
-```  
-对应的js文件代码为：  
-```javascript
-var Color;
-(function (Color) {
-    Color[Color["Red"] = 0] = "Red";
-    Color[Color["Green"] = 1] = "Green";
-    Color[Color["Blue"] = 2] = "Blue";
-})(Color || (Color = {}));
-;
-var c = Color.Red;
-/*枚举类型提供了一个便利就是可以由枚举的值得到它的名字。
-例如：我们知道数值为2，但是不确定它映射到Color里是那个名字，我们可以查找相应的名字*/
-var colorName = Color[2];
 console.log(colorName);
 ```  
 
@@ -183,19 +211,27 @@ a:7;   //这里会报错
 let a:any = 'seven';
 a = 7;   
 a = true;       //这三种类型都是可以的
+
+//如果没有声明类型，默认为any类型
+let any;       //默认为any类型
+any = 'any';   //可以是string
+any = 6;       //也可以是number
 ```  
 任意值的应用场景：变量值来自用户输入或者第三方代码库  
 注意：如果变量在声明时未指定其类型，那么它会被识别为任意类型。  
 
-**联合类型**  
-联合类型表示取值可以为多种类型的一种  
+**void**  
+某种程度上来说，void类型像是与any类型相反，它表示没有任何类型。 当一个函数没有返回值时，你通常会见到其返回值类型是 void：  
 ```typescript
-//联合类型表示取值可以为多种类型的一种
-let unite:string|number;
-unite = 1;
-unite = 'one';
-//unite = true;    error  并没有声明boolean类型
+function warnUser(): void {
+    alert("This is my warning message");
+}
 ```  
+声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null：  
+```typescript
+let unusable: void = undefined;
+```  
+
 
 ### TypeScript变量的声明  
 javascript中有三种定义变量的方式var，let，const（let、const是ES6新增的关键字），并不是TypeScript特有的。  
@@ -253,7 +289,7 @@ for (var i=0;i<10;i++){
 以下代码虽然没有指定类型，但是在编译的时候会报错：  
 ```typescript
 let a = 'one';
-a = 7;
+a = 7;   //Error
 ```  
 事实上，它等价于：  
 ```typescript
@@ -261,6 +297,22 @@ let a : string = 'one';
 a = 7;   
 ```  
 typescript会在没有明确的指定类型的时候推测出一个类型，这就是类型推论。  
+
+### TypeScript解构  
+
+解构的具体用法可以参考[ES6变量的解构赋值]()  
+
+最简单的解构莫过于数组的解构赋值了：  
+```typescript
+let input = [1, 2];
+let [first, second] = input;
+console.log(first); // outputs 1
+console.log(second); // outputs 2
+//这创建了2个命名变量 first 和 second。 相当于使用了索引，但更为方便：
+first = input[0];
+second = input[1];
+```  
+
 
 ## 语法新特性详解  
 ### 类型注解  
@@ -384,6 +436,109 @@ var shape = {
     }
 };
 ```  
+
+### [函数]()  
+函数是JavaScript应用程序的基础。 它帮助你实现抽象层，模拟类，信息隐藏和模块。 在TypeScript里，虽然已经支持类，命名空间和模块，但函数仍然是主要的定义 行为的地方。 TypeScript为JavaScript函数添加了额外的功能，让我们可以更容易地使用。  
+
+__为函数定义类型__  
+```typescript
+function add(x: number, y: number): number {
+    return x + y;
+}
+
+let myAdd = function(x: number, y: number): number { return x+y; };
+```  
+我们可以给每个参数添加类型之后再为函数本身添加返回值类型。 TypeScript能够根据返回语句自动推断出返回值类型，因此我们通常省略它。  
+
+__书写完整函数类型__  
+```typescript
+//现在我们已经为函数指定了类型，下面让我们写出函数的完整类型。
+let myAdd : (x:number,y:number) => number =
+    function(x:number,y:number): number {return x+y };
+```  
+函数类型包含两部分：参数类型和返回值类型。 当写出完整函数类型的时候，这两部分都是需要的。 我们以参数列表的形式写出参数类型，为每个参数指定一个名字和类型。 这个名字只是为了增加可读性。 我们也可以这么写：  
+```typescript
+let myAdd: (baseValue:number, increment:number) => number =
+    function(x: number, y: number): number { return x + y; };
+```  
+只要参数类型是匹配的，那么就认为它是有效的函数类型，而不在乎参数名是否正确。  
+第二部分是返回值类型。 对于返回值，我们在函数和返回值类型之前使用( =>)符号，使之清晰明了。 
+如之前提到的，返回值类型是函数类型的必要部分，如果函数没有返回任何值，你也必须指定返回值类型为 void而不能留空。  
+
+__推断类型__  
+尝试这个例子的时候，你会发现如果你在赋值语句的一边指定了类型但是另一边没有类型的话，TypeScript编译器会自动识别出类型：
+```typescript
+// myAdd has the full function type
+let myAdd = function(x: number, y: number): number { return x + y; };
+
+// The parameters `x` and `y` have the type number
+let myAdd: (baseValue:number, increment:number) => number =
+    function(x, y) { return x + y; };
+```  
+这叫做“按上下文归类”，是类型推论的一种。 它帮助我们更好地为程序指定类型。  
+
+__可选参数和默认参数__  
+TypeScript里的每个函数参数都是必须的。 这不是指不能传递 null或undefined作为参数，而是说编译器检查用户是否为每个参数都传入了值。 
+编译器还会假设只有这些参数会被传递进函数。 简短地说，传递给一个函数的参数个数必须与函数期望的参数个数一致。  
+```typescript
+function buildName(firstName: string, lastName: string) {
+    return firstName + " " + lastName;
+}
+
+let result1 = buildName("Bob");                  // error
+let result2 = buildName("Bob", "Adams", "Sr.");  // error
+let result3 = buildName("Bob", "Adams");         // ok
+```  
+在TypeScript里我们可以在参数名旁使用 __`?`__实现可选参数的功能。 比如，我们想让last name是可选的：  
+```typescript
+//我们在一个参数名后面紧跟（？），这个参数表示是可选参数
+function buildName(firstName: string, lastName?: string) {
+    if (lastName)
+        return firstName + " " + lastName;
+    else
+        return firstName;
+}
+
+let result1 = buildName("Bob");                     // ok
+let result2 = buildName("Bob", "Adams", "Sr.");     // error, too many parameters
+let result3 = buildName("Bob", "Adams");            // ok
+```  
+可选参数必须跟在必须参数后面。 如果上例我们想让first name是可选的，那么就必须调整它们的位置，把first name放在后面。  
+```typescript
+function buildName(lastName: string,firstName?: string) {
+    if (firstName)
+        return lastName + " " + firstName;
+    else
+        return lastName;
+}
+
+let result1 = buildName("Bob");                     // ok
+let result2 = buildName("Bob", "Adams", "Sr.");     // error, too many parameters
+let result3 = buildName("Bob", "Adams");            // ok
+```  
+在TypeScript里，我们也可以为参数提供一个默认值当用户没有传递这个参数或传递的值是undefined时。 它们叫做有默认初始化值的参数。
+让我们修改上例，把last name的默认值设置为"Smith"。  
+```typescript
+//当我们为参数提供一个默认值时，这个参数就是默认参数
+function buildName(firstName: string, lastName = "Smith") {
+    return firstName + " " + lastName;
+}
+let result1 = buildName("Bob");                  //  "Bob Smith"
+let result2 = buildName("Bob", undefined);       //  "Bob Smith"
+let result3 = buildName("Bob", "Adams", "Sr.");  // error, too many parameters
+let result4 = buildName("Bob", "Adams");         //  "Bob Smith"
+```  
+与可选参数不同的是，默认参数不需要放在必须参数的后面。 如果默认参数出现在必须参数前面，用户必须明确的传入 undefined值来获得默认值。  
+```typescript
+function buildName(firstName = "Will", lastName: string) {
+    return firstName + " " + lastName;
+}
+let result1 = buildName("Bob");                  // error, too few parameters
+let result2 = buildName("Bob", "Adams", "Sr.");  // error, too many parameters
+let result3 = buildName("Bob", "Adams");         //  "Bob Adams"
+let result4 = buildName(undefined, "Adams");     //  "Will Adams"  传入undefined的时候，默认参数才会被使用
+```
+
 
 ### [装饰器](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/Decorators.md)  
 
