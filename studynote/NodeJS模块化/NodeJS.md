@@ -11,7 +11,7 @@ NodeJS作者说，他创造NodeJS的目的是为了实现高性能Web服务器�
 参考[Web开发环境搭建指南](http://www.runoob.com/nodejs/nodejs-install-setup.html)  
 
 ## 4、NodeJS模块  
-编写稍大一点的程序时一般都会将代码模块化。NodeJS实现了[CommonJS规范]()。在NodeJS中，一般讲代码合理拆分到不同的JS文件中，每一个文件就是一个模块，而文件路径就是模块名。  
+编写稍大一点的程序时一般都会将代码模块化。NodeJS实现了[CommonJS规范](https://github.com/IFYOUUUU/Blog/blob/master/studynote/NodeJS%E6%A8%A1%E5%9D%97%E5%8C%96/CommonJS.md)。在NodeJS中，一般讲代码合理拆分到不同的JS文件中，每一个文件就是一个模块，而文件路径就是模块名。  
 在编写每一个模块时，都有exports、module、require三个预先定义好的变量可供使用。  
 
 ### 4.1 exports  
