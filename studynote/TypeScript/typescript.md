@@ -21,6 +21,7 @@
         - [类](#类)
         - [箭头函数表达式](#箭头函数表达式)
         - [函数](#函数)
+        - [泛型](#泛型)
         - [装饰器](#装饰器)
     - [项目配置](#项目配置)
 <!--/TOC-->
@@ -437,7 +438,7 @@ var shape = {
 };
 ```  
 
-### [函数]()  
+### 函数 
 函数是JavaScript应用程序的基础。 它帮助你实现抽象层，模拟类，信息隐藏和模块。 在TypeScript里，虽然已经支持类，命名空间和模块，但函数仍然是主要的定义 行为的地方。 TypeScript为JavaScript函数添加了额外的功能，让我们可以更容易地使用。  
 
 __为函数定义类型__  
@@ -539,6 +540,7 @@ let result3 = buildName("Bob", "Adams");         //  "Bob Adams"
 let result4 = buildName(undefined, "Adams");     //  "Will Adams"  传入undefined的时候，默认参数才会被使用
 ```
 
+### [泛型](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/Generics.md)
 
 ### [装饰器](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/Decorators.md)  
 
