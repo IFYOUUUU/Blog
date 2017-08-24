@@ -301,7 +301,7 @@ typescript会在没有明确的指定类型的时候推测出一个类型，这�
 
 ### TypeScript解构  
 
-解构的具体用法可以参考[ES6变量的解构赋值]()  
+解构的具体用法可以参考[ES6变量的解构赋值](https://github.com/IFYOUUUU/Blog/blob/master/studynote/javascript/ECNAScript6.md#变量的解构赋值)  
 
 最简单的解构莫过于数组的解构赋值了：  
 ```typescript
