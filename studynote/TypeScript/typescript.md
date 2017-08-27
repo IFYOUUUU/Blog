@@ -172,7 +172,6 @@ console.log(x[5].toString()); //OK, 'string' 和 'number' 都有 toString
 
 x[6] = true; // Error, 布尔不是(string | number)类型
 ```  
-__联合类型__是高级主题，我们会在以后的章节里讨论它  
 
 **联合类型**  
 联合类型表示取值可以为多种类型的一种  
@@ -205,7 +204,7 @@ console.log(colorName);
 如果是一个普通类型，在赋值的过程中改变类型是不允许的  
 ```typescript
 let s:string = 'seven';
-a:7;   //这里会报错
+s = 7;   //这里会报错
 ```  
 如果是any类型，则允许被赋值为任意类型  
 ```typescript
@@ -323,7 +322,7 @@ function Add(left:number,right:number){
     return left + right;
 }
 ```  
-对于基本类型de注解是number、boolean和string，而弱或者动态类型的结构则是any类型  
+对于基本类型的注解是number、boolean和string，而弱或者动态类型的结构则是any类型  
 当类型没有给出是，TypeScript编译器利用类型推论来推论类型，如果由于缺乏声明，没有类型可以被推断出，那么默认认为是any类型  
 ```typescript
 function area(shape:string,width:number,height:number){
@@ -359,7 +358,7 @@ console.log(area({name:'square',width:30,height:10,color:"blue"}));
 
 ### 类  
 
-传统的JavaScript程序使用函授和原型的继承来创建可重用的组建，但是对于熟悉面向对象的程序员来说还是有点棘手，因为他们用的是基于类的继承并且对象是有类构建出来的。而在ES6中，我们终于迎来了class  
+传统的JavaScript程序使用函数和原型的继承来创建可重用的组建，但是对于熟悉面向对象的程序员来说还是有点棘手，因为他们用的是基于类的继承并且对象是有类构建出来的。而在ES6中，我们终于迎来了class  
 下面看一个例子：  
 ```typescript
 class Shape{
