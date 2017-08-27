@@ -37,7 +37,7 @@
 * 模块 Modules  
 * 类型注解 Type annotations  
 * 编译时类型检查 Complie time type checking  
-* Arrow 函数  (类似于C#的Labmda表达式)   
+* 箭头函数  (类似于C#的Labmda表达式)   
 
 ### ES5、ES6、JavaScript和TypeScript的概念与关系  
 * ES是客户端脚本语言的规范，而ES5、ES6是规范的不同版本  
