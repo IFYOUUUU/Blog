@@ -48,15 +48,19 @@
 
 > * [CommonJS模块定义规范](https://github.com/IFYOUUUU/Blog/blob/master/studynote/NodeJS%E6%A8%A1%E5%9D%97%E5%8C%96/CommonJS.md) 
 
-> ## __AngularJS__
+> ## __Angular2__
 
-> * [typescript](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/typescript.md)
+> * [__typescript__](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/typescript.md)
 
-> * [angular技术概览]()
+> * [架构]()  
 
-> * [路由]()
+> * [__模块与数据绑定__]()  
 
-> * [Karma、jasmine]()
+> * [__表单__]()  
+
+> * [__路由与导航__]()
+
+> * [__Karma、jasmine__]()
 
 > * [wabpack、gulp]()
 
