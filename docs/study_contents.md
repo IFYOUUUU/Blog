@@ -52,9 +52,9 @@
 
 > * [__typescript__](https://github.com/IFYOUUUU/Blog/blob/master/studynote/TypeScript/typescript.md)
 
-> * [架构]()  
+> * [架构](https://github.com/IFYOUUUU/Blog/blob/master/studynote/Angular2/%E6%9E%B6%E6%9E%84.md)  
 
-> * [__模块与数据绑定__]()  
+> * [__模块与数据绑定__](https://github.com/IFYOUUUU/Blog/blob/master/studynote/Angular2/%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A.md)  
 
 > * [__表单__]()  
 
