@@ -58,7 +58,7 @@
 
 > * [__表单__](https://github.com/IFYOUUUU/Blog/tree/master/studynote/Angular2/%E8%A1%A8%E5%8D%95)  
 
-> * [__路由与导航__]()
+> * [__路由与导航__](https://github.com/IFYOUUUU/Blog/blob/master/studynote/Angular2/%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%AF%BC%E8%88%AA.md)
 
 > * [__Karma、jasmine__]()
 
