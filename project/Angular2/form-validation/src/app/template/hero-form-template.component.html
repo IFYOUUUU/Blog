@@ -1,0 +1,59 @@
+<div class="container">
+
+  <h1>Template-Driven Form</h1>
+  <form #heroForm="ngForm">
+    <div [hidden]="heroForm.submitted">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" name="name" class="form-control"
+               required minlength="4" forbiddenName="bob"
+               [(ngModel)]="hero.name" #name="ngModel" >
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched)"
+             class="alert alert-danger">
+
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+          <div *ngIf="name.errors.forbiddenName">
+            Name cannot be Bob.
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sex">Sex</label>
+        <input id="sex" class="form-control"
+               name="sex" [(ngModel)]="hero.sex" >
+      </div>
+
+      <div class="form-group">
+        <label for="hobby">Hero Hobby</label>
+        <select id="hobby" name="hobby" class="form-control"
+                required [(ngModel)]="hero.hobby" #hobby="ngModel" >
+          <option *ngFor="let hobby of hobbies" [value]="hobby">{{hobby}}</option>
+        </select>
+
+        <div *ngIf="hobby.errors && hobby.touched" class="alert alert-danger">
+          <div *ngIf="hobby.errors.required">Hobby is required.</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default"
+              [disabled]="heroForm.invalid">Submit</button>
+      <button type="button" class="btn btn-default"
+              (click)="heroForm.resetForm({})">Reset</button>
+    </div>
+
+    <div class="submitted-message" *ngIf="heroForm.submitted">
+      <p>You've submitted your hero, {{ heroForm.value.name }}!</p>
+      <button (click)="heroForm.resetForm({})">Add new hero</button>
+    </div>
+  </form>
+
+</div>
