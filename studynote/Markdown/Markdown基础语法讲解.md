@@ -73,6 +73,7 @@ ____
 
 ### 图片元素  
 * 在文字当中插入图片是经常需要的功能，Markdown中使用了一种类似于超链接的一个方式来标记照片，具体的方法就是： 
+![百度](https://github.com/IFYOUUUU/Blog/blob/master/studynote/Markdown/1.png)
 ```md
 ![image](url)
 ```  
